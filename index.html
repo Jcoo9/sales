@@ -1,0 +1,173 @@
+
+<h2 class="sr-only">Digital media sales objection handler — click an objection to see how to respond</h2>
+<style>
+  .oh-wrap { padding: 0.5rem 0 1rem; }
+  .oh-tabs { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.25rem; }
+  .oh-tab { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; cursor: pointer; transition: border-color 0.15s; }
+  .oh-tab.active { border-color: var(--color-border-secondary); }
+  .oh-head { display: flex; align-items: center; gap: 12px; padding: 1rem 1.25rem; }
+  .oh-label { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; flex-shrink: 0; }
+  .oh-label.red { background: var(--color-background-danger); color: var(--color-text-danger); }
+  .oh-label.amber { background: var(--color-background-warning); color: var(--color-text-warning); }
+  .oh-label.blue { background: var(--color-background-info); color: var(--color-text-info); }
+  .oh-objection { font-size: 14px; font-weight: 500; color: var(--color-text-primary); flex: 1; }
+  .oh-arrow { font-size: 13px; color: var(--color-text-tertiary); transition: transform 0.2s; }
+  .oh-arrow.open { transform: rotate(90deg); }
+  .oh-body { display: none; border-top: 0.5px solid var(--color-border-tertiary); padding: 1.1rem 1.25rem; }
+  .oh-body.open { display: block; }
+  .oh-section { margin-bottom: 1rem; }
+  .oh-section:last-child { margin-bottom: 0; }
+  .oh-slabel { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-tertiary); margin-bottom: 0.4rem; }
+  .oh-why { font-size: 13px; color: var(--color-text-secondary); line-height: 1.65; }
+  .oh-script { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.85rem 1rem; font-size: 14px; color: var(--color-text-primary); line-height: 1.7; font-style: italic; }
+  .oh-script strong { font-style: normal; font-weight: 500; color: var(--color-text-secondary); font-size: 12px; display: block; margin-bottom: 0.3rem; }
+  .oh-moves { display: flex; flex-direction: column; gap: 6px; }
+  .oh-move { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 0.6rem 0.85rem; font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+  .oh-move::before { content: '→ '; color: var(--color-text-tertiary); }
+  .oh-divider { height: 0.5px; background: var(--color-border-tertiary); margin: 0.85rem 0; }
+  .oh-input-row { display: flex; gap: 8px; margin-top: 1.25rem; }
+  .oh-input-row input { flex: 1; padding: 9px 13px; font-size: 13px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); outline: none; }
+  .oh-input-row button { padding: 9px 16px; font-size: 13px; font-weight: 500; background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); color: var(--color-text-primary); cursor: pointer; white-space: nowrap; }
+  .oh-input-row button:hover { background: var(--color-background-secondary); }
+  .oh-ai-response { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-top: 1rem; font-size: 14px; color: var(--color-text-primary); line-height: 1.7; display: none; }
+  .oh-ai-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-tertiary); margin-bottom: 0.5rem; }
+</style>
+
+<div class="oh-wrap">
+  <div class="oh-tabs">
+
+    <div class="oh-tab" id="tab0">
+      <div class="oh-head" onclick="tog(0)">
+        <span class="oh-label red">Structural</span>
+        <span class="oh-objection">"We have to buy media through our internal trade desk."</span>
+        <span class="oh-arrow" id="arr0">›</span>
+      </div>
+      <div class="oh-body" id="body0">
+        <div class="oh-section">
+          <div class="oh-slabel">Why reps lose here</div>
+          <div class="oh-why">They treat this as a hard no and back off. It's not a no — it's a routing issue. The trade desk is a buyer, not a blocker. Most reps don't know how to sell through it.</div>
+        </div>
+        <div class="oh-divider"></div>
+        <div class="oh-section">
+          <div class="oh-slabel">What to say</div>
+          <div class="oh-script"><strong>Response</strong>"Totally understand — that's actually pretty common at your scale. Help me understand how your trade desk evaluates new inventory sources. Is it purely on price and scale, or do they consider things like audience exclusivity and brand safety certifications? Because that changes how I'd position this for them."</div>
+        </div>
+        <div class="oh-divider"></div>
+        <div class="oh-section">
+          <div class="oh-slabel">Next moves</div>
+          <div class="oh-moves">
+            <div class="oh-move">Ask for an intro to the trade desk contact — you're not going around them, you're helping them route it correctly</div>
+            <div class="oh-move">Find out if there's a private marketplace or PMP path — trade desks love PMPs because it still looks like programmatic to them</div>
+            <div class="oh-move">Offer to put together a one-pager the planner can share internally — do the work for them</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="oh-tab" id="tab1">
+      <div class="oh-head" onclick="tog(1)">
+        <span class="oh-label amber">Price</span>
+        <span class="oh-objection">"You're too expensive."</span>
+        <span class="oh-arrow" id="arr1">›</span>
+      </div>
+      <div class="oh-body" id="body1">
+        <div class="oh-section">
+          <div class="oh-slabel">Why reps lose here</div>
+          <div class="oh-why">They immediately defend the price or start discounting. Both moves signal that the price wasn't justified in the first place. "Too expensive" almost always means "I don't see the value yet" — not "the number is too high."</div>
+        </div>
+        <div class="oh-divider"></div>
+        <div class="oh-section">
+          <div class="oh-slabel">What to say</div>
+          <div class="oh-script"><strong>Response</strong>"Compared to what? I want to make sure we're comparing the right things. If you're looking at a lower CPM somewhere else, I'd want to understand what their audience looks like against yours, what their viewability and completion rates are, and what kind of reporting and optimization support comes with it. Because on a cost-per-outcome basis, we usually look very different."</div>
+        </div>
+        <div class="oh-divider"></div>
+        <div class="oh-section">
+          <div class="oh-slabel">Next moves</div>
+          <div class="oh-moves">
+            <div class="oh-move">Never discount first — ask what budget they do have and build a package around it</div>
+            <div class="oh-move">Reframe from CPM to cost-per-outcome — viewability, completed views, site visits, whatever their KPI is</div>
+            <div class="oh-move">Ask what a successful campaign looks like for them — anchor the conversation on results, not rate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="oh-tab" id="tab2">
+      <div class="oh-head" onclick="tog(2)">
+        <span class="oh-label blue">Approval</span>
+        <span class="oh-objection">"The client didn't approve you."</span>
+        <span class="oh-arrow" id="arr2">›</span>
+      </div>
+      <div class="oh-body" id="body2">
+        <div class="oh-section">
+          <div class="oh-slabel">Why reps lose here</div>
+          <div class="oh-why">Reps accept this and disappear. But "the client didn't approve" usually means the agency didn't advocate for you — because they didn't have enough to make the case. The client rarely has strong opinions about specific publishers unless someone put one in front of them.</div>
+        </div>
+        <div class="oh-divider"></div>
+        <div class="oh-section">
+          <div class="oh-slabel">What to say</div>
+          <div class="oh-script"><strong>Response</strong>"That's helpful to know. Can I ask — was it that the client specifically said no to us, or that we weren't on the approved list they were working from? Because those are pretty different situations. If it's the latter, I'd love to help you build the case to get us added. I can put together something specifically for [client name] that speaks to their audience and their goals."</div>
+        </div>
+        <div class="oh-divider"></div>
+        <div class="oh-section">
+          <div class="oh-slabel">Next moves</div>
+          <div class="oh-moves">
+            <div class="oh-move">Offer to build a custom one-pager the agency can send to the client — make it easy for them to advocate for you</div>
+            <div class="oh-move">Ask if there's a path to get on the approved vendor list for future campaigns</div>
+            <div class="oh-move">Find out who at the brand actually controls vendor approvals — sometimes it's the media manager, sometimes it's legal or procurement</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border-top: 0.5px solid var(--color-border-tertiary); padding-top: 1.25rem;">
+    <div class="oh-slabel">Got a different objection? Type it in.</div>
+    <div class="oh-input-row">
+      <input id="custom-obj" type="text" placeholder="e.g. We already have enough publisher partners..." onkeydown="if(event.key==='Enter')handleCustom()" />
+      <button onclick="handleCustom()">Get coaching ↗</button>
+    </div>
+    <div class="oh-ai-response" id="ai-resp">
+      <div class="oh-ai-label">Coaching</div>
+      <div id="ai-text"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function tog(i) {
+  const body = document.getElementById('body'+i);
+  const arr = document.getElementById('arr'+i);
+  const isOpen = body.classList.contains('open');
+  document.querySelectorAll('.oh-body').forEach(b=>b.classList.remove('open'));
+  document.querySelectorAll('.oh-arrow').forEach(a=>a.classList.remove('open'));
+  if(!isOpen) { body.classList.add('open'); arr.classList.add('open'); }
+}
+
+async function handleCustom() {
+  const inp = document.getElementById('custom-obj');
+  const obj = inp.value.trim();
+  if(!obj) return;
+  const resp = document.getElementById('ai-resp');
+  const text = document.getElementById('ai-text');
+  resp.style.display = 'block';
+  text.textContent = 'Thinking...';
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 500,
+        system: `You are a sales coach for digital media sellers — people who sell advertising inventory on websites, apps, and digital platforms to brands and agencies. You have deep knowledge of how agency buying works: holding companies, trading desks, planners vs buyers, programmatic vs direct IO, PMPs, brand safety, viewability, and how brands make vendor decisions. When given an objection, you give: (1) why reps typically lose on this objection in one sentence, (2) an exact word-for-word response the rep can use, (3) two follow-up moves. Be direct, specific, and practical. No fluff.`,
+        messages: [{role:'user', content:`Objection: "${obj}"\n\nGive me coaching on how to handle this.`}]
+      })
+    });
+    const data = await r.json();
+    text.textContent = data.content.filter(b=>b.type==='text').map(b=>b.text).join('');
+  } catch(e) {
+    text.textContent = 'Something went wrong — please try again.';
+  }
+}
+</script>
