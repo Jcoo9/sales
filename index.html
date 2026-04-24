@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Digital Media Sales Coach</title>
+<style>
+  :root {
+    --bg: #fafaf8;
+    --bg2: #f2f0ec;
+    --bg3: #e6e4df;
+    --text: #18170f;
+    --text2: #5a5850;
+    --text3: #9a9890;
+    --border: rgba(24,23,15,0.1);
+    --border2: rgba(24,23,15,0.2);
+    --accent: #1e4d35;
+    --accent-bg: #eaf3ec;
+    --red-bg: #fdf0ee;
+    --red-text: #8b2a1a;
+    --amber-bg: #fef7ec;
+    --amber-text: #7a4a0a;
+    --blue-bg: #eef3fb;
+    --blue-text: #1a3c6e;
+    --r: 10px;
+    --rlg: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  .page { max-width: 720px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+
+  /* Header */
+  .hdr { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid var(--border); }
+  .logo { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+  .hdr h1 { font-size: 1.5rem; font-weight: 500; color: var(--text); margin-bottom: 0.4rem; }
+  .hdr p { font-size: 14px; color: var(--text2); line-height: 1.65; }
+
+  /* Tabs */
+  .tabs { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.5rem; }
+  .tab { background: #fff; border: 0.5px solid var(--border); border-radius: var(--rlg); overflow: hidden; }
+  .head { display: flex; align-items: center; gap: 10px; padding: 1rem 1.25rem; cursor: pointer; user-select: none; }
+  .head:hover { background: var(--bg2); }
+  .pill { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; flex-shrink: 0; }
+  .pill-red { background: var(--red-bg); color: var(--red-text); }
+  .pill-amber { background: var(--amber-bg); color: var(--amber-text); }
+  .pill-blue { background: var(--blue-bg); color: var(--blue-text); }
+  .obj { font-size: 14px; color: var(--text); flex: 1; line-height: 1.4; }
+  .arr { font-size: 16px; color: var(--text3); transition: transform 0.2s; flex-shrink: 0; }
+  .arr.open { transform: rotate(90deg); }
+  .body { display: none; border-top: 0.5px solid var(--border); padding: 1.25rem; }
+  .body.open { display: block; }
+  .slabel { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text3); margin-bottom: 0.4rem; }
+  .why { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 1rem; }
+  .script { background: var(--bg2); border-radius: var(--r); padding: 1rem 1.1rem; margin-bottom: 1rem; }
+  .script-lbl { font-size: 11px; color: var(--text3); display: block; margin-bottom: 0.4rem; }
+  .script p { font-size: 14px; color: var(--text); line-height: 1.75; font-style: italic; }
+  .moves { display: flex; flex-direction: column; gap: 6px; }
+  .move { background: var(--bg2); border-radius: var(--r); padding: 0.65rem 0.9rem; font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .divider { height: 0.5px; background: var(--border); margin: 1rem 0; }
+
+  /* Custom input */
+  .custom { background: #fff; border: 0.5px solid var(--border); border-radius: var(--rlg); padding: 1.25rem; }
+  .custom-h { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 0.3rem; }
+  .custom-sub { font-size: 13px; color: var(--text2); margin-bottom: 1rem; }
+  .row { display: flex; gap: 8px; }
+  .row input { flex: 1; padding: 10px 14px; font-size: 14px; font-family: 'Helvetica Neue', sans-serif; border: 0.5px solid var(--border2); border-radius: var(--r); background: var(--bg); color: var(--text); outline: none; }
+  .row input:focus { border-color: var(--accent); }
+  .row button { padding: 10px 20px; font-size: 13px; font-family: 'Helvetica Neue', sans-serif; font-weight: 500; background: var(--accent); border: none; border-radius: var(--r); color: #fff; cursor: pointer; white-space: nowrap; transition: opacity 0.15s; }
+  .row button:hover { opacity: 0.85; }
+  .ai-box { background: var(--bg2); border-radius: var(--r); padding: 1rem 1.1rem; margin-top: 1rem; display: none; }
+  .ai-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text3); margin-bottom: 0.5rem; }
+  .ai-text { font-size: 14px; color: var(--text); line-height: 1.75; white-space: pre-wrap; }
+
+  /* Notice */
+  .notice { background: var(--amber-bg); border: 0.5px solid rgba(200,150,12,0.3); border-radius: var(--r); padding: 0.75rem 1rem; margin-bottom: 1.5rem; font-size: 13px; color: var(--amber-text); line-height: 1.6; }
+
+  @media(max-width: 520px) {
+    .row { flex-direction: column; }
+    .obj { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hdr">
+    <div class="logo">Digital Media Sales Coach</div>
+    <h1>Objection Handler</h1>
+    <p>Real responses to the objections that kill deals — built on 20+ years of selling digital media to agencies and brands direct.</p>
+  </div>
+
+  <div class="notice">The AI coach at the bottom requires an Anthropic API key to work. The three objections above work without one.</div>
+
+  <div class="tabs">
+
+    <div class="tab">
+      <div class="head" onclick="tog(0)">
+        <span class="pill pill-red">Structural</span>
+        <span class="obj">"We have to buy media through our internal trade desk."</span>
+        <span class="arr" id="arr0">›</span>
+      </div>
+      <div class="body" id="body0">
+        <div class="slabel">Why reps lose here</div>
+        <div class="why">They treat this as a hard no and back off. It's not a no — it's a routing issue. The trade desk is a buyer, not a blocker. Most reps don't know how to sell through it.</div>
+        <div class="divider"></div>
+        <div class="slabel">What to say</div>
+        <div class="script">
+          <span class="script-lbl">Word for word →</span>
+          <p>"Totally understand — that's pretty common at your scale. Help me understand how your trade desk evaluates new inventory sources. Is it purely on price and scale, or do they consider things like audience exclusivity and brand safety certifications? Because that changes how I'd position this for them."</p>
+        </div>
+        <div class="divider"></div>
+        <div class="slabel">Next moves</div>
+        <div class="moves">
+          <div class="move">→ Ask for an intro to the trade desk contact — frame it as helping them route it correctly, not going around anyone</div>
+          <div class="move">→ Find out if there's a PMP path — trade desks love PMPs because it still looks like programmatic to them internally</div>
+          <div class="move">→ Offer to write the one-pager the planner can share with the trade desk — do the work for them</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab">
+      <div class="head" onclick="tog(1)">
+        <span class="pill pill-amber">Price</span>
+        <span class="obj">"You're too expensive."</span>
+        <span class="arr" id="arr1">›</span>
+      </div>
+      <div class="body" id="body1">
+        <div class="slabel">Why reps lose here</div>
+        <div class="why">They immediately defend the price or start discounting. Both moves signal the price wasn't justified in the first place. "Too expensive" almost always means "I don't see the value yet" — not "the number is too high."</div>
+        <div class="divider"></div>
+        <div class="slabel">What to say</div>
+        <div class="script">
+          <span class="script-lbl">Word for word →</span>
+          <p>"Compared to what? I want to make sure we're comparing the right things. If you're looking at a lower CPM somewhere else — what does their audience look like against yours? What are their viewability and completion rates? Because on a cost-per-outcome basis, we usually look very different."</p>
+        </div>
+        <div class="divider"></div>
+        <div class="slabel">Next moves</div>
+        <div class="moves">
+          <div class="move">→ Never discount first — ask what budget they actually have and build a package around it</div>
+          <div class="move">→ Reframe from CPM to cost-per-outcome — viewability, completed views, site visits, whatever their KPI is</div>
+          <div class="move">→ Ask what a successful campaign looks like for them — anchor the conversation on results, not rate</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab">
+      <div class="head" onclick="tog(2)">
+        <span class="pill pill-blue">Approval</span>
+        <span class="obj">"The client didn't approve you."</span>
+        <span class="arr" id="arr2">›</span>
+      </div>
+      <div class="body" id="body2">
+        <div class="slabel">Why reps lose here</div>
+        <div class="why">Reps accept this and disappear. But "the client didn't approve" usually means the agency didn't advocate for you — because they didn't have enough to make the case. Clients rarely have strong opinions about specific publishers unless someone put one in front of them.</div>
+        <div class="divider"></div>
+        <div class="slabel">What to say</div>
+        <div class="script">
+          <span class="script-lbl">Word for word →</span>
+          <p>"Helpful to know — can I ask, was it that the client specifically said no to us, or that we weren't on the approved list they were working from? Those are pretty different situations. If it's the latter, I'd love to help you build the case to get us added. I can put something together specifically for their audience and goals."</p>
+        </div>
+        <div class="divider"></div>
+        <div class="slabel">Next moves</div>
+        <div class="moves">
+          <div class="move">→ Offer to build a custom one-pager the agency can send to the brand — make it easy for them to advocate for you</div>
+          <div class="move">→ Ask about the path to get on the approved vendor list for future campaigns</div>
+          <div class="move">→ Find out who at the brand actually controls vendor approvals — often it's the media manager, legal, or procurement</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="custom">
+    <div class="custom-h">Got a different objection?</div>
+    <div class="custom-sub">Type it in and get real coaching — powered by AI trained on digital media sales.</div>
+    <div class="row">
+      <input id="cin" type="text" placeholder="e.g. We already have enough publisher partners..." onkeydown="if(event.key==='Enter')go()"/>
+      <button onclick="go()">Get coaching →</button>
+    </div>
+    <div class="ai-box" id="aibox">
+      <div class="ai-lbl">Coaching</div>
+      <div class="ai-text" id="aitext"></div>
+    </div>
+  </div>
+
+</div>
+<script>
+function tog(i){
+  const wasOpen=document.getElementById('body'+i).classList.contains('open');
+  [0,1,2].forEach(j=>{
+    document.getElementById('body'+j).classList.remove('open');
+    document.getElementById('arr'+j).classList.remove('open');
+  });
+  if(!wasOpen){
+    document.getElementById('body'+i).classList.add('open');
+    document.getElementById('arr'+i).classList.add('open');
+  }
+}
+
+const API_KEY = 'YOUR_API_KEY_HERE';
+
+async function go(){
+  const inp=document.getElementById('cin');
+  const obj=inp.value.trim();
+  if(!obj)return;
+  if(API_KEY==='YOUR_API_KEY_HERE'){
+    document.getElementById('aibox').style.display='block';
+    document.getElementById('aitext').textContent='Add your Anthropic API key to the HTML file to enable live coaching.';
+    return;
+  }
+  const box=document.getElementById('aibox');
+  const txt=document.getElementById('aitext');
+  box.style.display='block';
+  txt.textContent='Thinking...';
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:600,
+        system:`You are a sales coach for digital media sellers — people who sell advertising inventory on websites, apps, and digital platforms to brands and agencies. You know agency buying cold: holding companies, trading desks, planners vs buyers, programmatic vs direct IO, PMPs, brand safety, viewability, rate cards. When given an objection give: 1) Why reps lose on this in one sentence. 2) Exact word-for-word response to use. 3) Two specific follow-up moves. Be direct and specific. No generic advice.`,
+        messages:[{role:'user',content:`Objection: "${obj}"\n\nCoach me on how to handle this.`}]
+      })
+    });
+    const d=await r.json();
+    txt.textContent=d.content.filter(b=>b.type==='text').map(b=>b.text).join('');
+  }catch(e){
+    txt.textContent='Something went wrong. Check your API key and try again.';
+  }
+}
+</script>
+</body>
+</html>
